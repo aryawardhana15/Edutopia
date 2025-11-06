@@ -6,7 +6,7 @@ Platform e-learning dengan fitur gamification, forum diskusi, dan chat mentor-pe
 - **Backend**: Laravel 12 (PHP OOP dengan Repository Pattern & Service Layer)
 - **Frontend**: React (JavaScript/TypeScript)
 - **Database**: MySQL/SQLite
-- **Authentication**: Laravel Sanctum
+- **Authentication**: Laravel Sanctum (utk ngamanin rute API)
 
 ## Fitur Utama
 
@@ -34,6 +34,7 @@ Platform e-learning dengan fitur gamification, forum diskusi, dan chat mentor-pe
 - Admin features (Verifikasi Mentor, Moderasi, Laporan)
 - Update Profil
 - File upload handling
+- buat materi(edit, hapus, buat)
 
 ## Struktur Project OOP
 

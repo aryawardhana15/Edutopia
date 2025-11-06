@@ -11,21 +11,26 @@ class ForumPost extends Model
 
     protected $fillable = [
         'user_id',
+        'course_id',
         'title',
         'content',
         'category',
+        'tags',
         'views',
         'likes',
         'is_pinned',
+        'is_locked',
         'is_deleted',
         'deleted_by',
         'deleted_at',
     ];
 
     protected $casts = [
+        'tags' => 'array',
         'views' => 'integer',
         'likes' => 'integer',
         'is_pinned' => 'boolean',
+        'is_locked' => 'boolean',
         'is_deleted' => 'boolean',
         'deleted_at' => 'datetime',
     ];
@@ -34,6 +39,11 @@ class ForumPost extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
     }
 
     public function comments()

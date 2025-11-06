@@ -14,12 +14,14 @@ class ForumComment extends Model
         'user_id',
         'parent_id',
         'content',
+        'likes',
         'is_deleted',
         'deleted_by',
         'deleted_at',
     ];
 
     protected $casts = [
+        'likes' => 'integer',
         'is_deleted' => 'boolean',
         'deleted_at' => 'datetime',
     ];

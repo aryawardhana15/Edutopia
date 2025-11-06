@@ -80,10 +80,42 @@ class AuthService
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        // Award daily login streak XP (only for pelajar)
+        if ($user->isPelajar() && $user->pelajar) {
+            $this->awardDailyLoginXP($user->id);
+        }
+
         return [
             'user' => $user->load(['pelajar', 'mentor']),
             'token' => $token,
         ];
+    }
+
+    /**
+     * Award daily login streak XP
+     */
+    protected function awardDailyLoginXP(int $userId): void
+    {
+        $lastLogin = \App\Models\ActivityLog::where('user_id', $userId)
+            ->where('action', 'login')
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        $today = now()->startOfDay();
+        $lastLoginDate = $lastLogin ? $lastLogin->created_at->startOfDay() : null;
+
+        // If last login was not today, award XP
+        if (!$lastLoginDate || $lastLoginDate->lt($today)) {
+            try {
+                $gamificationService = app(\App\Services\GamificationService::class);
+                $gamificationService->addXP($userId, 5, 'Daily login streak');
+                
+                // Log login activity
+                \App\Models\ActivityLog::log('login', $userId);
+            } catch (\Exception $e) {
+                // Ignore errors
+            }
+        }
     }
 
     /**
