@@ -1,4 +1,4 @@
-# RSI - Platform E-Learning
+# RSI - Platform E-Learning.
 
 Platform e-learning dengan fitur gamification, forum diskusi, dan chat mentor-pelajar.
 
